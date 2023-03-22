@@ -18,15 +18,17 @@ public class UserDaoJDBCImpl implements UserDao {
 
     @Override
     public void createUsersTable() {
-        try (PreparedStatement statement = connection.prepareStatement("CREATE TABLE test.users (\n" +
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/test?useSSL=false&serverTimezone=UTC", "root", "1234")) {
+            PreparedStatement statement = connection.prepareStatement("CREATE TABLE test.users (\n" +
                 "  id INT NOT NULL AUTO_INCREMENT,\n" +
                 "  name VARCHAR(45),\n" +
                 "  lastName VARCHAR(45),\n" +
                 "  age INT,\n" +
                 "  PRIMARY KEY (id))\n" +
                 "ENGINE = InnoDB\n" +
-                "DEFAULT CHARACTER SET = utf8;")) {
+                "DEFAULT CHARACTER SET = utf8;");
             statement.executeUpdate();
+            connection.setAutoCommit(false);
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
