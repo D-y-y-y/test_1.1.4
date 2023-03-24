@@ -1,22 +1,15 @@
 package jm.task.core.jdbc.dao;
 
-import com.mysql.cj.Session;
 import jm.task.core.jdbc.model.User;
-import jm.task.core.jdbc.util.Util;
 
 import java.util.List;
-
-import org.hibernate.Transaction;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import static jm.task.core.jdbc.util.Util.getConnection;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private static final Connection connection = getConnection();
-
     public UserDaoJDBCImpl() {
 
     }
